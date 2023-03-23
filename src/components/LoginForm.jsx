@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../features/firebase-config";
 
 export default function LoginForm() {
     const [email, setEmail] = useState();
@@ -8,7 +9,7 @@ export default function LoginForm() {
     return (
         <form onSubmit={(e) => {
             e.preventDefault()
-            signInWithEmailAndPassword(fire.auth, email, password)
+            signInWithEmailAndPassword(auth, email, password)
         }} className="flex flex-col w-96" >
             <label htmlFor="email">E-mail</label>
             <input onChange={(e) => setEmail(e.target.value)} type="email" id="email" className="" />

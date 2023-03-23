@@ -3,19 +3,32 @@ import QuizComponent from "../components/QuizComponent";
 
 import {onAuthStateChanged} from "firebase/auth"
 import { auth, db } from "../features/firebase-config"
-import { addDoc, collection, doc, getDocs, query, setDoc, where } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { useEffect, useRef, useState } from "react";
+import CreateQuizModal from "../components/CreateQuizModal";
 
 export default function MyQuizzes() {
-    const [finalQuery, setFinalQuery] = useState([])
+    const effectRan = useRef(false)
+    const [quizzes, setQuizzes] = useState([])
+    const [quizModalActive, setQuizModalActive] = useState()
+
     useEffect(() => {
-        renderQuizzes()
+        if(effectRan.current === false) {
+        onAuthStateChanged(auth, (user) => {
+            if(user) getQuizzes(user.uid)
+        })
+        return () => {
+            effectRan.current = true;
+        }
+    }
     }, [])
-    const renderQuizzes = async () => {
-        const q = query(collection(db, "quizzes"), where("quizOwner", "==", "HspUCmIgy8d7rWqEpIIvtQDNlLC3"))
+
+    const getQuizzes = async (uid) => {
+        setQuizzes([])
+        const q = query(collection(db, "quizzes"), where("quizOwner", "==", uid))
         const querySnapshot = await getDocs(q)
         return querySnapshot.forEach(doc => {
-            setFinalQuery((prev) => [...prev, doc.data()])
+            setQuizzes((prev) => [...prev, doc.data()])
         });
     }
     return (
@@ -23,24 +36,25 @@ export default function MyQuizzes() {
             <h1 className="text-4xl m-4 text-center">My quizzes</h1>
 
             {
-                finalQuery?.map((el) => {
-                    renderQuizzes()
-                    return <QuizComponent quizName={el.quizName} description={el.description} />
-                })
+                quizModalActive == true ? (
+                    <CreateQuizModal setQuizModalActive={setQuizModalActive} getQuizzes={getQuizzes}/>
+                ) : null
             }
 
-            <button className="bg-slate-500 m-4 p-1" onClick={() => renderQuizzes()}>render</button>
-            <button className="bg-slate-500 m-4 p-1" onClick={() => {
-                addDoc(collection(db, "quizzes"), {
-                    quizName: "PEPERONI QUIZZZZZZZ",
-                    description: "AAAAAAAAAAAAAAAAAAAAAA",
-                    quizOwner: auth.currentUser.uid,
-                })
-            }}>create</button>
+            <main className="grid grid-cols-4">
+                {
+                    quizzes?.map((el) => {
+                        return <QuizComponent quizName={el.quizName} description={el.description} />
+                    })
+                }
+            </main>
+
+            <button className="bg-slate-500 m-4 p-1" onClick={() => getQuizzes()}>render</button>
             <button onClick={() => {
-                console.log(finalQuery)
+                console.log(quizzes)
+                console.log(uid)
             }}>test</button>
-            <CreateQuizButton />
+            <CreateQuizButton setQuizModalActive={setQuizModalActive} />
         </>
     )
 }
