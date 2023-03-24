@@ -1,5 +1,5 @@
 import { onAuthStateChanged } from "firebase/auth"
-import { addDoc, collection } from "firebase/firestore"
+import { addDoc, collection, doc, setDoc } from "firebase/firestore"
 import { useState } from "react"
 import { auth, db } from "../features/firebase-config"
 
@@ -9,13 +9,19 @@ export default function CreateQuizModal({setQuizModalActive, getQuizzes}) {
     return (
         <form onSubmit={(e) => {
             e.preventDefault()
+            // checks if the user is authenticated
             onAuthStateChanged(auth, (user) => {
                 if(user) {
-                    addDoc(collection(db, "quizzes"), {
-                    quizName: quizName,
-                    description: quizDescription,
-                    quizOwner: user.uid,
-                }).then(() => getQuizzes(user.uid))
+                    let newDocRef = doc(collection(db, "quizzes"))
+                    // creates a new document
+                    setDoc(newDocRef, {
+                        quizId: newDocRef.id,
+                        quizName: quizName,
+                        description: quizDescription,
+                        quizOwner: user.uid,
+                    })
+                // re-fetch the data into the quizzes variable
+                getQuizzes(user.uid)
             }})
             setQuizModalActive(false)
         }} className="bg-slate-400 w-2/6 h-1/2 absolute justify-center flex flex-col top-1/2 -translate-y-1/2 right-1/2 translate-x-1/2 rounded-md">

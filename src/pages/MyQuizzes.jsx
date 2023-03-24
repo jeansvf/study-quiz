@@ -43,8 +43,8 @@ export default function MyQuizzes() {
 
             <main className="grid grid-cols-4">
                 {
-                    quizzes?.map((el) => {
-                        return <QuizComponent quizName={el.quizName} description={el.description} />
+                    quizzes?.map((quiz) => {
+                        return <QuizComponent quiz={quiz} />
                     })
                 }
             </main>
