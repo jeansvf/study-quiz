@@ -8,7 +8,6 @@ export default function QuizComponent({quiz}) {
             <h2 className="px-2 py-1 text-white">{quiz.description}</h2>
             <button onClick={() => {
                 navigate(`/quiz/${quiz.quizId}`)
-                console.log(quiz);
             }} className="self-end hover:cursor-pointer bg-slate-500 w-12 m-4 mt-auto rounded-md">start</button>
         </div>
     )

@@ -26,7 +26,7 @@ export default function CreateQuizModal({setQuizModalActive, getQuizzes}) {
             setQuizModalActive(false)
         }} className="bg-slate-400 w-2/6 h-1/2 absolute justify-center flex flex-col top-1/2 -translate-y-1/2 right-1/2 translate-x-1/2 rounded-md">
             <h1 className="text-4xl text-center">Create Quiz</h1>
-            <button onClick={() => setQuizModalActive(false)} className="flex mr-1 absolute right-0 top-0">X</button>
+            <span onClick={() => setQuizModalActive(false)} className="flex mr-1 absolute right-0 top-0">X</span>
             <label htmlFor="quiz-name" className="w-96 self-center">Quiz Name</label>
             <input onChange={(e) => {setQuizName(e.target.value)}} type="text" id="quiz-name" className="w-96 self-center m-1" />
             <label htmlFor="quiz-description" className="w-96 self-center">Quiz Description</label>

@@ -9,20 +9,21 @@ import CreateQuizModal from "../components/CreateQuizModal";
 
 export default function MyQuizzes() {
     const effectRan = useRef(false)
-    const [quizzes, setQuizzes] = useState([])
+    const [quizzes, setQuizzes] = useState()
     const [quizModalActive, setQuizModalActive] = useState()
 
     useEffect(() => {
         if(effectRan.current === false) {
+        // if user is logged in, add quizzes to the quizzes state
         onAuthStateChanged(auth, (user) => {
             if(user) getQuizzes(user.uid)
         })
         return () => {
             effectRan.current = true;
         }
-    }
-    }, [])
+    }}, [])
 
+    // add quizzes from the user to the quizzes state
     const getQuizzes = async (uid) => {
         setQuizzes([])
         const q = query(collection(db, "quizzes"), where("quizOwner", "==", uid))
@@ -35,25 +36,24 @@ export default function MyQuizzes() {
         <>
             <h1 className="text-4xl m-4 text-center">My quizzes</h1>
 
+            {/* render the modal to add quizzes */}
             {
                 quizModalActive == true ? (
                     <CreateQuizModal setQuizModalActive={setQuizModalActive} getQuizzes={getQuizzes}/>
-                ) : null
-            }
+                    ) : null
+                }
 
             <main className="grid grid-cols-4">
+                {/* render the quizzes from the quizzes state */}
                 {
-                    quizzes?.map((quiz) => {
-                        return <QuizComponent quiz={quiz} />
-                    })
+                    quizzes != undefined ? (
+                        quizzes?.map((quiz) => {
+                            return <QuizComponent quiz={quiz} />
+                        })
+                    ) : (<div>loading...</div>)
                 }
             </main>
 
-            <button className="bg-slate-500 m-4 p-1" onClick={() => getQuizzes()}>render</button>
-            <button onClick={() => {
-                console.log(quizzes)
-                console.log(uid)
-            }}>test</button>
             <CreateQuizButton setQuizModalActive={setQuizModalActive} />
         </>
     )
