@@ -1,6 +1,7 @@
 import { doc, getDoc } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'
+import QuizSolve from '../components/QuizSolve';
 import { db } from '../features/firebase-config';
 
 export default function Quiz() {
@@ -10,6 +11,7 @@ export default function Quiz() {
 
     const [quiz, setQuiz] = useState()
 
+    // set the quiz variable to the value of the selected quiz
     useEffect(() => {
         getQuiz()
     }, [])
@@ -19,14 +21,19 @@ export default function Quiz() {
         setQuiz(response.data())})
     }
 
+    // start quiz
+    const solveQuiz = () => {
+        
+        return (
+            <QuizSolve quiz={quiz}/>
+        )
+    }
+
     return (
-        <div>
+        <main className='w-full h-screen'>
             {quiz ? (
-                <>
-                    <div>{quiz.quizName}</div>
-                    <div>{quiz.description}</div>
-                </>
+                solveQuiz()
             ) : (<div>loading...</div>)}
-        </div>
+        </main>
     )
 }

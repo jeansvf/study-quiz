@@ -38,17 +38,15 @@ export default function MyQuizzes() {
 
             {/* render the modal to add quizzes */}
             {
-                quizModalActive == true ? (
-                    <CreateQuizModal setQuizModalActive={setQuizModalActive} getQuizzes={getQuizzes}/>
-                    ) : null
-                }
+                quizModalActive == true ? <CreateQuizModal setQuizModalActive={setQuizModalActive} getQuizzes={getQuizzes}/> : null
+            }
 
             <main className="grid grid-cols-4">
                 {/* render the quizzes from the quizzes state */}
                 {
                     quizzes != undefined ? (
                         quizzes?.map((quiz) => {
-                            return <QuizComponent quiz={quiz} />
+                            return <QuizComponent quiz={quiz} key={quiz.quizId}/>
                         })
                     ) : (<div>loading...</div>)
                 }
