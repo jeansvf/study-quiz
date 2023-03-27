@@ -45,7 +45,7 @@ export default function CreateQuizModal({setQuizModalActive, getQuizzes}) {
                         <div className="mb-4 text-black items-start">
                             <div className="flex items-center">
                                 <span className="bg-slate-600 text-slate-500 text-center w-6 h-6 mr-3">{index + 1}</span>
-                                <input onChange={(e) => question.text = e.target.value} className="flex w-1/2 mb-2 mt-2 placeholder:pl-1" type="text" placeholder="Question"/>
+                                <input autoFocus onChange={(e) => question.text = e.target.value} className="flex w-1/2 mb-2 mt-2 placeholder:pl-1" type="text" placeholder="Question"/>
                             </div>
                             <input onChange={(e) => question.a = e.target.value} type="text" placeholder="Alternative A" className="mr-1 placeholder:pl-1" />
                             <input onChange={(e) => question.b = e.target.value} type="text" placeholder="Alternative B" className="mr-1 placeholder:pl-1" />
