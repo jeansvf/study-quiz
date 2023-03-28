@@ -18,9 +18,6 @@ export default function UserProfile() {
         <>
             <div>E-mail: {userEmail}</div>
             <button onClick={() => {signOut(auth)}}>Log Out</button>
-            <button onClick={() => {
-                
-            }} className="block">Test</button>
         </>
     )
 }

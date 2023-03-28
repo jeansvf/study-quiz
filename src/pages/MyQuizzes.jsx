@@ -1,8 +1,8 @@
 import CreateQuizButton from "../components/CreateQuizButton";
 import QuizComponent from "../components/QuizComponent";
 
-import {onAuthStateChanged} from "firebase/auth"
-import { auth, db } from "../features/firebase-config"
+import { onAuthStateChanged } from "firebase/auth";
+import { auth, db } from "../features/firebase-config";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { useEffect, useRef, useState } from "react";
 import CreateQuizModal from "../components/CreateQuizModal";
@@ -48,7 +48,11 @@ export default function MyQuizzes() {
                         quizzes?.map((quiz) => {
                             return <QuizComponent quiz={quiz} key={quiz.quizId}/>
                         })
-                    ) : (<div>loading...</div>)
+                    ) : (
+                        <div className="absolute right-1/2 top-1/2 h-10 w-10 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]" role="status">
+                            <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">Loading...</span>
+                        </div>
+                    )
                 }
             </main>
 

@@ -9,14 +9,15 @@ export default function QuizSolve ({quiz}) {
     const [wrongAnswers, setWrongAnswers] = useState([])
 
     const checkQuestion = (answer) => {
+
+        // if question is guessed right, add to correctAnswers
         if (quiz.questions[actualQuestion].rightAnswer == answer) {
             setCorrectAnswers(prev => [...prev, quiz.questions[actualQuestion]])
         } else {
-            setWrongAnswers(prev => [...prev, quiz.questions[actualQuestion]])
-        }
-        
-        if(actualQuestion + 1 == quiz.questions.length) {
-            // todo: end the quiz
+            // get the guessed alternative
+            let answeredQuestion = quiz.questions[actualQuestion]
+            answeredQuestion.yourGuess = answer
+            setWrongAnswers([...wrongAnswers, answeredQuestion])
         }
 
         // go to next question

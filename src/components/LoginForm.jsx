@@ -8,7 +8,7 @@ export default function LoginForm() {
     const [password, setPassword] = useState();
 
     const navigate = useNavigate()
-    
+
     return (
         <form onSubmit={(e) => {
             e.preventDefault()

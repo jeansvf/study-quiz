@@ -1,6 +1,7 @@
 import { onAuthStateChanged } from "firebase/auth"
 import { collection, doc, setDoc } from "firebase/firestore"
 import { useState } from "react"
+import { MdClose } from "react-icons/md"
 import { auth, db } from "../features/firebase-config"
 import AddQuestion from "./AddQuestion"
 
@@ -34,7 +35,7 @@ export default function CreateQuizModal({setQuizModalActive, getQuizzes}) {
             handleSubmit(e)
         }} className="bg-slate-400 p-4 w-8/12 h-4/6 fixed flex flex-col top-1/2 -translate-y-1/2 right-1/2 translate-x-1/2 rounded-md">
             <h1 className="text-4xl text-center">Create Quiz</h1>
-            <span onClick={() => setQuizModalActive(false)} className="flex mr-1 absolute right-0 top-0">X</span>
+            <MdClose onClick={() => setQuizModalActive(false)} className="flex absolute right-1 top-1 cursor-pointer" size={30} />
             <label htmlFor="quiz-name" className="w-96">Quiz Name</label>
             <input onChange={(e) => {setQuizName(e.target.value)}} type="text" id="quiz-name" className="w-full text-black" />
             <label htmlFor="quiz-description" className="w-96">Quiz Description</label>
