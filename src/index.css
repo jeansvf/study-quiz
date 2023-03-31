@@ -3,8 +3,18 @@
 @tailwind utilities;
 
 :root {
-    background: #4c4c4c;
-    color: #ffffff;
+    background: #2c2c2c;
+    font-family: sans-serif;
+}
+
+input[type="checkbox"] {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
 }
 
 ::-webkit-scrollbar {
@@ -24,3 +34,4 @@
   ::-webkit-scrollbar-thumb:hover {
     background: #3d3d3d;
 }
+

@@ -1,4 +1,3 @@
-import CreateQuizButton from "../components/CreateQuizButton";
 import QuizComponent from "../components/QuizComponent";
 
 import { onAuthStateChanged } from "firebase/auth";
@@ -34,7 +33,7 @@ export default function MyQuizzes() {
     }
     return (
         <>
-            <h1 className="text-4xl m-4 text-center">My quizzes</h1>
+            <h1 className="text-4xl m-4 text-center text-white">My quizzes</h1>
 
             {/* render the modal to add quizzes */}
             {
@@ -56,7 +55,7 @@ export default function MyQuizzes() {
                 }
             </main>
 
-            <CreateQuizButton setQuizModalActive={setQuizModalActive} />
+            <button onClick={() => setQuizModalActive(true)} className="absolute right-0 bottom-0 m-6 bg-teal-500 text-white rounded-md p-4 px-5 text-xl hover:bg-teal-400 hover:cursor-pointer">Create Quiz</button>
         </>
     )
 }
