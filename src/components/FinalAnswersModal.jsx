@@ -1,8 +1,27 @@
 import { MdClose } from 'react-icons/md'
+import { motion } from 'framer-motion'
 
 export default function FinalAnswersModal({answers, activeModal}) {
     return (
-        <div className="overflow-y-scroll w-2/4 h-3/4 p-3 bg-gray-900 absolute bottom-1/2 translate-y-1/2 right-1/2 translate-x-1/2 rounded-md">
+        <motion.div
+        initial={{
+            x: "-50%",
+            y: "-50%",
+            opacity: 0,
+            scale: .9
+        }}
+        animate={{
+            opacity: 1,
+            scale: 1,
+        }}
+        exit={{
+            opacity: 0,
+            scale: .9
+        }}
+        transition={{
+            duration: .1,
+        }}
+        className="overflow-y-scroll w-2/4 h-3/4 p-3 bg-zinc-800 absolute top-1/2 left-1/2 rounded-md">
             <MdClose onClick={() => activeModal(false)} size={30} className="ml-auto cursor-pointer" />
             {
                 answers.map((answer) => {
@@ -19,6 +38,6 @@ export default function FinalAnswersModal({answers, activeModal}) {
                     )
                 })
             }
-        </div>
+        </motion.div>
     )
 }

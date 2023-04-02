@@ -1,10 +1,13 @@
 import QuizComponent from "../components/QuizComponent";
+import LoadingSvg from "../components/LoadingSvg";
+import CreateQuizModal from "../components/CreateQuizModal";
+import { RiAddFill } from 'react-icons/ri'
 
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "../features/firebase-config";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { useEffect, useRef, useState } from "react";
-import CreateQuizModal from "../components/CreateQuizModal";
+import { AnimatePresence } from 'framer-motion'
 
 export default function MyQuizzes() {
     const effectRan = useRef(false)
@@ -35,10 +38,14 @@ export default function MyQuizzes() {
         <>
             <h1 className="text-4xl m-4 text-center text-white">My quizzes</h1>
 
-            {/* render the modal to add quizzes */}
-            {
-                quizModalActive == true ? <CreateQuizModal setQuizModalActive={setQuizModalActive} getQuizzes={getQuizzes}/> : null
-            }
+            <AnimatePresence>
+                {/* render the modal to add quizzes */}
+                {
+                    quizModalActive == true ? (
+                        <CreateQuizModal setQuizModalActive={setQuizModalActive} getQuizzes={getQuizzes}/>
+                    ) : null
+                }
+            </AnimatePresence>
 
             <main className="grid grid-cols-4">
                 {/* render the quizzes from the quizzes state */}
@@ -48,14 +55,12 @@ export default function MyQuizzes() {
                             return <QuizComponent quiz={quiz} key={quiz.quizId}/>
                         })
                     ) : (
-                        <div className="absolute right-1/2 top-1/2 h-10 w-10 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]" role="status">
-                            <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">Loading...</span>
-                        </div>
+                        <LoadingSvg />
                     )
                 }
             </main>
 
-            <button onClick={() => setQuizModalActive(true)} className="absolute right-0 bottom-0 m-6 bg-teal-500 text-white rounded-md p-4 px-5 text-xl hover:bg-teal-400 hover:cursor-pointer">Create Quiz</button>
+            <RiAddFill type="button" onClick={() => setQuizModalActive(true)} className="absolute right-0 bottom-0 m-8  hover:fill-teal-400 hover:cursor-pointer" color="#14b8a6" size={60} />
         </>
     )
 }

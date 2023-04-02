@@ -2,9 +2,9 @@ import { onAuthStateChanged } from "firebase/auth"
 import { collection, doc, setDoc } from "firebase/firestore"
 import { useState } from "react"
 import { TfiClose } from "react-icons/tfi"
-import { BsCheck, BsPlus } from "react-icons/bs"
+import { BsPlus } from "react-icons/bs"
 import { auth, db } from "../features/firebase-config"
-import CheckBox from "./CheckBox"
+import { motion } from "framer-motion"
 import Question from "./Question"
 
 export default function CreateQuizModal({setQuizModalActive, getQuizzes}) {
@@ -33,9 +33,26 @@ export default function CreateQuizModal({setQuizModalActive, getQuizzes}) {
     }
 
     return (
-        <form onSubmit={(e) => {
+        <motion.form 
+        initial={{
+            scale: .8,
+            opacity: 0
+        }}
+        animate={{
+            scale: 1,
+            opacity: 1,
+            y: 0
+        }}
+        exit={{
+            scale: .8,
+            opacity: 0,
+        }}
+        transition={{
+            duration: .1
+        }}
+        onSubmit={(e) => {
             handleSubmit(e)
-        }} className="bg-neutral-700 p-6 w-1/3 h-5/6 overflow-y-scroll fixed flex flex-col top-1/2 -translate-y-1/2 right-1/2 translate-x-1/2 rounded-lg">
+        }} className="bg-neutral-700 p-6 w-1/3 h-5/6 overflow-y-scroll fixed left-1/3 flex flex-col rounded-xl">
             <TfiClose onClick={() => setQuizModalActive(false)} className="absolute right-6 cursor-pointer" size={30} color="white" />
             <div className="flex flex-col">
                 <h1 className="text-4xl mb-4 text-center text-white">Create Quiz</h1>
@@ -67,6 +84,6 @@ export default function CreateQuizModal({setQuizModalActive, getQuizzes}) {
                 <BsPlus size={26} /> Add Question
             </button>
             <input type="submit" value={"Done"} className="hover:cursor-pointer py-1 px-4 rounded-md mt-auto text-xl bg-green-400 self-end justify-self-end" />
-        </form>
+        </motion.form>
     )
 }
