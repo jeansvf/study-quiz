@@ -12,7 +12,7 @@ export default function Question({question, index}) {
         }
     }
     return (
-        <div className=" mt-4 text-black items-starts">
+        <div className="mt-4 text-black">
             <p className="mb-1 text-xl text-white">Question <span>{index + 1}</span></p>
             <div className="flex">
                 <textarea autoFocus onChange={(e) => question.text = e.target.value} className="w-2/3 h-32 text-lg rounded-md resize-none" type="text"/>

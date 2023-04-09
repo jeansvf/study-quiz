@@ -27,7 +27,7 @@ export default function QuizSolve ({quiz}) {
         <>
             {
             actualQuestion + 1 <= quiz.questions.length ? (
-            <div className="flex flex-col w-2/4 h-3/4 bg-neutral-700 fixed bottom-1/2 translate-y-1/2 right-1/2 translate-x-1/2 rounded-md">
+            <div className="flex flex-col w-full h-full lg:w-[60rem] sm:w-[40rem] sm:h-5/6 bg-neutral-700 fixed bottom-1/2 translate-y-1/2 right-1/2 translate-x-1/2 rounded-md">
                 <h1 className="text-4xl my-3 mx-4 text-green-200">{quiz.quizName}</h1>
                 <p className="text-xl mx-4 text-white">{actualQuestion + 1 + " - "}{quiz.questions[actualQuestion].text}</p>
                 <div className="grid grid-cols-2 gap-1 m-3 mt-auto text-xl">

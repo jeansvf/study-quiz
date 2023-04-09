@@ -34,25 +34,26 @@ export default function MyQuizzes() {
             setQuizzes((prev) => [...prev, doc.data()])
         });
     }
+    
     return (
-        <>
-            <h1 className="text-4xl m-4 text-center text-white">My quizzes</h1>
-
+        <div className="overscroll-none">
             <AnimatePresence>
                 {/* render the modal to add quizzes */}
                 {
                     quizModalActive == true ? (
                         <CreateQuizModal setQuizModalActive={setQuizModalActive} getQuizzes={getQuizzes}/>
-                    ) : null
-                }
+                        ) : null
+                    }
             </AnimatePresence>
 
-            <main className="grid grid-cols-4">
+            <h1 className="text-4xl m-4 text-center text-white">My quizzes</h1>
+
+            <main className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-between gap-x-6 gap-y-6 m-6">
                 {/* render the quizzes from the quizzes state */}
                 {
                     quizzes != undefined ? (
                         quizzes?.map((quiz) => {
-                            return <QuizComponent quiz={quiz} key={quiz.quizId}/>
+                            return <QuizComponent quiz={quiz} key={quiz.quizId} getQuizzes={getQuizzes}/>
                         })
                     ) : (
                         <LoadingSvg />
@@ -60,7 +61,7 @@ export default function MyQuizzes() {
                 }
             </main>
 
-            <RiAddFill type="button" onClick={() => setQuizModalActive(true)} className="absolute right-0 bottom-0 m-8  hover:fill-teal-400 hover:cursor-pointer" color="#14b8a6" size={60} />
-        </>
+            <RiAddFill type="button" onClick={() => setQuizModalActive(true)} className="fixed right-0 bottom-0 m-8  hover:fill-teal-400 hover:cursor-pointer" color="#14b8a6" size={60} />
+        </div>
     )
 }

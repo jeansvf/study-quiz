@@ -52,7 +52,7 @@ export default function CreateQuizModal({setQuizModalActive, getQuizzes}) {
         }}
         onSubmit={(e) => {
             handleSubmit(e)
-        }} className="bg-neutral-700 p-6 w-1/3 h-5/6 overflow-y-scroll fixed left-1/3 flex flex-col rounded-xl">
+        }} className="bg-neutral-700 overflow-y-scroll overflow-x-hidden pb-24 pt-6 px-6 w-full h-full top-0 fixed flex flex-col sm:rounded-xl sm:p-6 sm:w-1/3 sm:right-1/3 sm:top-20 sm:h-5/6">
             <TfiClose onClick={() => setQuizModalActive(false)} className="absolute right-6 cursor-pointer" size={30} color="white" />
             <div className="flex flex-col">
                 <h1 className="text-4xl mb-4 text-center text-white">Create Quiz</h1>
@@ -63,18 +63,6 @@ export default function CreateQuizModal({setQuizModalActive, getQuizzes}) {
             </div>
             {
                 quizQuestions?.map((question, index) => {
-                    {/*
-                    <input onChange={(e) => question.a = e.target.value} type="text" placeholder="Alternative A" className="mr-1 placeholder:pl-1" />
-                    <input onChange={(e) => question.b = e.target.value} type="text" placeholder="Alternative B" className="mr-1 placeholder:pl-1" />
-                    <input onChange={(e) => question.c = e.target.value} type="text" placeholder="Alternative C" className="mr-1 placeholder:pl-1" />
-                    <input onChange={(e) => question.d = e.target.value} type="text" placeholder="Alternative D" className="mr-1 placeholder:pl-1" />
-                    <input onChange={(e) => {
-                        let answer = e.target.value.toLowerCase().toString()
-                        if(answer === "a" || answer === "b" || answer === "c" || answer === "d") {
-                            question.rightAnswer = e.target.value
-                        }
-                    }} type="text" placeholder="Correct Answer (ex: a)" className="mt-1 placeholder:pl-1" />
-                    */}
                     return (
                         <Question question={question} index={index} />
                     )

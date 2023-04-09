@@ -7,7 +7,7 @@ export default function FinishedQuiz({guesses, correctAnswers, wrongAnswers}) {
     const [wrongAnswersModalActive, setWrongAnswersModalActive] = useState(false)
     const [correctAnswersModalActive, setCorrectAnswersModalActive] = useState(false)
     return (
-        <div className="flex flex-col w-2/4 h-3/4 p-5 text-white bg-zinc-900 fixed bottom-1/2 translate-y-1/2 right-1/2 translate-x-1/2 rounded-xl">
+        <div className="flex flex-col w-full h-full lg:w-[52rem] sm:w-[40rem] sm:h-3/4 p-5 text-white bg-zinc-900 fixed bottom-1/2 translate-y-1/2 right-1/2 translate-x-1/2 sm:rounded-xl">
             
             <AnimatePresence>
                 {/* modal with correct answers */}
@@ -34,7 +34,7 @@ export default function FinishedQuiz({guesses, correctAnswers, wrongAnswers}) {
                     Wrong answers: <span>{wrongAnswers.length}</span>
                 </p>
             </div>
-            <Link to={"/my-quizzes"} className="text-center text-lg mt-auto p-2 rounded-md w-1/3 h-11 self-center bg-gradient-to-r from-pink-500 to-blue-500" type="button">Go back to My Quizzes</Link>
+            <Link to={"/my-quizzes"} className="text-lg mt-auto px-5 py-2 rounded-md h-11 self-center bg-gradient-to-r from-pink-500 to-blue-500" type="button">My Quizzes</Link>
         </div>
     )
 }
