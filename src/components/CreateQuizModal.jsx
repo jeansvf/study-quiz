@@ -33,9 +33,9 @@ export default function CreateQuizModal({setQuizModalActive, getQuizzes}) {
     }
 
     return (
-        <motion.form 
+        <motion.form
         initial={{
-            scale: .8,
+            scale: .9,
             opacity: 0
         }}
         animate={{
@@ -44,7 +44,7 @@ export default function CreateQuizModal({setQuizModalActive, getQuizzes}) {
             y: 0
         }}
         exit={{
-            scale: .8,
+            scale: .9,
             opacity: 0,
         }}
         transition={{
@@ -61,13 +61,14 @@ export default function CreateQuizModal({setQuizModalActive, getQuizzes}) {
                 <label htmlFor="quiz-description" className="w-96 text-white text-lg mt-2">Quiz Description</label>
                 <textarea onChange={(e) => {setQuizDescription(e.target.value)}} type="text" id="quiz-description" className="rounded-md h-24 resize-none text-black text-lg" />
             </div>
-            {
-                quizQuestions?.map((question, index) => {
-                    return (
-                        <Question question={question} index={index} />
-                    )
-                })
-            }
+                {/* render questions */}
+                {
+                    quizQuestions?.map((question, index) => {
+                        return (
+                            <Question question={question} index={index} />
+                        )
+                    })
+                }
             <button onClick={() => setQuizQuestions([...quizQuestions, {}])} className='flex items-center w-fit mt-4 text-md text-white text-lg' type="button">
                 <BsPlus size={26} /> Add Question
             </button>

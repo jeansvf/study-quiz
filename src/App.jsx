@@ -5,10 +5,12 @@ import Login from "./pages/Login";
 import MyQuizzes from "./pages/MyQuizzes";
 import Quiz from "./pages/Quiz";
 import Register from "./pages/Register";
+import NavBar from "./components/NavBar";
 
 export default function App() {
   return (
       <BrowserRouter>
+        <NavBar />
         <Routes>
             <Route path="/account" element={<Account />} />
             <Route path="/login" element={<Login />} />

@@ -1,7 +1,7 @@
 import QuizComponent from "../components/QuizComponent";
 import LoadingSvg from "../components/LoadingSvg";
 import CreateQuizModal from "../components/CreateQuizModal";
-import { RiAddFill } from 'react-icons/ri'
+import { IoIosAddCircle } from 'react-icons/io'
 
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "../features/firebase-config";
@@ -36,7 +36,7 @@ export default function MyQuizzes() {
     }
     
     return (
-        <div className="overscroll-none">
+        <div className="ml-24">
             <AnimatePresence>
                 {/* render the modal to add quizzes */}
                 {
@@ -61,7 +61,7 @@ export default function MyQuizzes() {
                 }
             </main>
 
-            <RiAddFill type="button" onClick={() => setQuizModalActive(true)} className="fixed right-0 bottom-0 m-8  hover:fill-teal-400 hover:cursor-pointer" color="#14b8a6" size={60} />
+            <IoIosAddCircle type="button" onClick={() => setQuizModalActive(true)} className="fixed right-0 bottom-0 m-8 hover:fill-gray-300 hover:cursor-pointer" color="#ffffff" size={60} />
         </div>
     )
 }
