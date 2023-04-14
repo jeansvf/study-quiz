@@ -1,6 +1,6 @@
-import QuizComponent from "../components/QuizComponent";
+import QuizComponent from "../components/MyQuizzes/QuizComponent";
 import LoadingSvg from "../components/LoadingSvg";
-import CreateQuizModal from "../components/CreateQuizModal";
+import CreateQuizModal from "../components/MyQuizzes/CreateQuizModal";
 import { IoIosAddCircle } from 'react-icons/io'
 
 import { onAuthStateChanged } from "firebase/auth";
@@ -36,7 +36,7 @@ export default function MyQuizzes() {
     }
     
     return (
-        <div className="ml-24">
+        <div className="ml-20">
             <AnimatePresence>
                 {/* render the modal to add quizzes */}
                 {
@@ -45,9 +45,7 @@ export default function MyQuizzes() {
                         ) : null
                     }
             </AnimatePresence>
-
             <h1 className="text-4xl m-4 text-center text-white">My quizzes</h1>
-
             <main className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-between gap-x-6 gap-y-6 m-6">
                 {/* render the quizzes from the quizzes state */}
                 {
@@ -55,12 +53,11 @@ export default function MyQuizzes() {
                         quizzes?.map((quiz) => {
                             return <QuizComponent quiz={quiz} key={quiz.quizId} getQuizzes={getQuizzes}/>
                         })
-                    ) : (
-                        <LoadingSvg />
-                    )
-                }
+                        ) : (
+                            <LoadingSvg />
+                            )
+                        }
             </main>
-
             <IoIosAddCircle type="button" onClick={() => setQuizModalActive(true)} className="fixed right-0 bottom-0 m-8 hover:fill-gray-300 hover:cursor-pointer" color="#ffffff" size={60} />
         </div>
     )

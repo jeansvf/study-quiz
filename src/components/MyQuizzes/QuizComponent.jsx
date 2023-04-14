@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { deleteDoc, doc } from 'firebase/firestore'
-import { auth, db } from '../features/firebase-config'
+import { auth, db } from '../../features/firebase-config'
 import { onAuthStateChanged } from 'firebase/auth'
 
 export default function QuizComponent({quiz, getQuizzes}) {

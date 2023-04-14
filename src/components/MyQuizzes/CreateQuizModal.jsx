@@ -3,9 +3,9 @@ import { collection, doc, setDoc } from "firebase/firestore"
 import { useState } from "react"
 import { TfiClose } from "react-icons/tfi"
 import { BsPlus } from "react-icons/bs"
-import { auth, db } from "../features/firebase-config"
+import { auth, db } from "../../features/firebase-config"
 import { motion } from "framer-motion"
-import Question from "./Question"
+import ModalQuestion from "./ModalQuestion"
 
 export default function CreateQuizModal({setQuizModalActive, getQuizzes}) {
     const [quizName, setQuizName] = useState()
@@ -65,7 +65,7 @@ export default function CreateQuizModal({setQuizModalActive, getQuizzes}) {
                 {
                     quizQuestions?.map((question, index) => {
                         return (
-                            <Question question={question} index={index} />
+                            <ModalQuestion question={question} index={index} />
                         )
                     })
                 }

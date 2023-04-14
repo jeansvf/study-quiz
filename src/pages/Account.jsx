@@ -1,4 +1,4 @@
-import UserProfile from "../components/UserProfile"
+import UserProfile from "../components/Account/UserProfile"
 
 export default function Account() {
     return (

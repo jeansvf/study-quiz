@@ -1,7 +1,7 @@
 import { doc, getDoc } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'
-import QuizSolve from '../components/QuizSolve';
+import QuizSolve from '../components/Quiz/QuizSolve';
 import { db } from '../features/firebase-config';
 import LoadingSvg from '../components/LoadingSvg';
 
