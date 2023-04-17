@@ -2,25 +2,32 @@ import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import FinalAnswersModal from "./FinalAnswersModal";
+import DarkBackground from "../DarkBackground";
 
 export default function FinishedQuiz({guesses, correctAnswers, wrongAnswers}) {
     const [wrongAnswersModalActive, setWrongAnswersModalActive] = useState(false)
     const [correctAnswersModalActive, setCorrectAnswersModalActive] = useState(false)
     return (
-        <div className="flex flex-col w-full h-full lg:w-[52rem] sm:w-[40rem] sm:h-3/4 p-5 text-white bg-zinc-900 fixed bottom-1/2 translate-y-1/2 right-1/2 translate-x-1/2 sm:rounded-xl">
+        <div className="flex flex-col w-full h-full lg:w-[52rem] sm:w-[40rem] sm:h-3/4 p-5 text-white bg-white fixed bottom-1/2 translate-y-1/2 right-1/2 translate-x-1/2 sm:rounded-xl">
             
             <AnimatePresence>
                 {/* modal with correct answers */}
                 {
                     correctAnswersModalActive == true ? (
-                        <FinalAnswersModal answers={correctAnswers} activeModal={setCorrectAnswersModalActive} />
+                        <>
+                            <DarkBackground />
+                            <FinalAnswersModal answers={correctAnswers} activeModal={setCorrectAnswersModalActive} />
+                        </>
                     ) : null
                 }
 
                 {/* modal with wrong answers */}
                 {
                     wrongAnswersModalActive == true ? (
-                        <FinalAnswersModal answers={wrongAnswers} activeModal={setWrongAnswersModalActive} />
+                        <>
+                            <DarkBackground />
+                            <FinalAnswersModal answers={wrongAnswers} activeModal={setWrongAnswersModalActive} />
+                        </>
                     ) : null
                 }
             </AnimatePresence>

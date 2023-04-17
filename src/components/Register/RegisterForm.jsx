@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { auth, db } from "../../features/firebase-config"
-import { createUserWithEmailAndPassword, onAuthStateChanged, updateProfile } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
+import { auth } from "../../features/firebase-config"
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
 export default function LoginForm() {
@@ -24,7 +23,7 @@ export default function LoginForm() {
         <form onSubmit={(e) => {
             e.preventDefault()
             createNewUser()
-        }} className="flex flex-col w-96 text-white" >
+        }} className="flex flex-col w-96 text-white">
             <label htmlFor="email">Name</label>
             <input onChange={(e) => setName(e.target.value)} type="text" id="name" className="text-black" />
             <label htmlFor="email">E-mail</label>

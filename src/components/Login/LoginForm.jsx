@@ -13,7 +13,7 @@ export default function LoginForm() {
         <form onSubmit={(e) => {
             e.preventDefault()
             signInWithEmailAndPassword(auth, email, password).then(() => navigate("/my-quizzes"))
-        }} className="flex flex-col w-96 text-white" >
+        }} className="flex flex-col w-96 text-white">
             <label htmlFor="email">E-mail</label>
             <input onChange={(e) => setEmail(e.target.value)} type="email" id="email" className="text-black" />
             <label htmlFor="password">Password</label>

@@ -52,14 +52,14 @@ export default function CreateQuizModal({setQuizModalActive, getQuizzes}) {
         }}
         onSubmit={(e) => {
             handleSubmit(e)
-        }} className="bg-neutral-700 overflow-y-scroll overflow-x-hidden pb-24 pt-6 px-6 w-full h-full top-0 fixed flex flex-col sm:rounded-xl sm:p-6 sm:w-1/3 sm:right-1/3 sm:top-20 sm:h-5/6">
-            <TfiClose onClick={() => setQuizModalActive(false)} className="absolute right-6 cursor-pointer" size={30} color="white" />
+        }} className="bg-white z-10 overflow-y-scroll overflow-x-hidden pb-24 pt-6 px-6 w-full h-full top-0 fixed flex flex-col sm:rounded-xl sm:p-6 sm:w-1/3 sm:right-1/3 sm:top-20 sm:h-5/6">
+            <TfiClose onClick={() => setQuizModalActive(false)} className="absolute right-6 cursor-pointer" size={30} color="black" />
             <div className="flex flex-col">
-                <h1 className="text-4xl mb-4 text-center text-white">Create Quiz</h1>
-                <label htmlFor="quiz-name" className="w-96 text-white text-lg">Quiz Name</label>
-                <input onChange={(e) => {setQuizName(e.target.value)}} type="text" id="quiz-name" className="rounded-md text-black text-lg" />
-                <label htmlFor="quiz-description" className="w-96 text-white text-lg mt-2">Quiz Description</label>
-                <textarea onChange={(e) => {setQuizDescription(e.target.value)}} type="text" id="quiz-description" className="rounded-md h-24 resize-none text-black text-lg" />
+                <h1 className="text-4xl mb-4 text-center text-black">Create Quiz</h1>
+                <label htmlFor="quiz-name" className="w-96 text-black text-lg">Quiz Name</label>
+                <input onChange={(e) => {setQuizName(e.target.value)}} type="text" id="quiz-name" className="rounded-md bg-[#eeeeee] text-black text-lg" />
+                <label htmlFor="quiz-description" className="w-96 text-black text-lg mt-2">Quiz Description</label>
+                <textarea onChange={(e) => {setQuizDescription(e.target.value)}} type="text" id="quiz-description" className="rounded-md h-24 resize-none bg-[#eeeeee] text-black text-lg" />
             </div>
                 {/* render questions */}
                 {
@@ -69,7 +69,7 @@ export default function CreateQuizModal({setQuizModalActive, getQuizzes}) {
                         )
                     })
                 }
-            <button onClick={() => setQuizQuestions([...quizQuestions, {}])} className='flex items-center w-fit mt-4 text-md text-white text-lg' type="button">
+            <button onClick={() => setQuizQuestions([...quizQuestions, {}])} className='flex items-center w-fit mt-4 text-md text-black text-lg' type="button">
                 <BsPlus size={26} /> Add Question
             </button>
             <input type="submit" value={"Done"} className="hover:cursor-pointer py-1 px-4 rounded-md mt-auto text-xl bg-green-400 self-end justify-self-end" />
