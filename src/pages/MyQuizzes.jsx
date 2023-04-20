@@ -2,19 +2,21 @@ import QuizComponent from "../components/MyQuizzes/QuizComponent";
 import LoadingSvg from "../components/LoadingSvg";
 import CreateQuizModal from "../components/MyQuizzes/CreateQuizModal";
 import SideBar from "../components/SideBar";
+import DarkBackground from "../components/DarkBackground";
 import { BsPlus } from 'react-icons/bs';
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "../features/firebase-config";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence } from 'framer-motion';
-import DarkBackground from "../components/DarkBackground";
+import { useSideBarContext } from "../SideBarContext";
 
 export default function MyQuizzes() {
     const effectRan = useRef(false)
     const [quizzes, setQuizzes] = useState()
     const [quizModalActive, setQuizModalActive] = useState(false)
-    const [sideBarActive, setSideBarActive] = useState(false)
+
+    const { sideBarActive } = useSideBarContext();
 
     useEffect(() => {
         if(effectRan.current === false) {
@@ -39,8 +41,14 @@ export default function MyQuizzes() {
     
     return (
         <>
-            {sideBarActive ? <SideBar setSideBarActive={setSideBarActive} /> : null}
-            {sideBarActive ? <DarkBackground /> : null}
+            <AnimatePresence>
+                {sideBarActive ? (
+                    <>
+                        <SideBar />
+                        <DarkBackground />
+                    </>
+                ) : null}
+            </AnimatePresence>
             <div className="mt-28">
                 <AnimatePresence>
                     {/* render the modal to add quizzes */}
@@ -48,7 +56,7 @@ export default function MyQuizzes() {
                         quizModalActive == true ? (
                             <>
                                 <DarkBackground />
-                                <CreateQuizModal setQuizModalActive={setQuizModalActive} getQuizzes={getQuizzes}/>
+                                <CreateQuizModal getQuizzes={getQuizzes}/>
                             </>
                             ) : null
                     }
