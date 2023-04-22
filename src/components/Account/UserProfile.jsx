@@ -18,7 +18,7 @@ export default function UserProfile() {
     }, [])
 
     return (
-        <div className="absolute left-1/2 top-20 -translate-x-1/2 sm:w-fit h-[14rem] sm:flex mt-8">
+        <div className="flex flex-col items-center absolute left-1/2 top-20 -translate-x-1/2 sm:w-fit h-[14rem] sm:flex-row mt-8">
             <motion.div
             initial={{
                 scale: 0,
@@ -33,7 +33,7 @@ export default function UserProfile() {
             }}
             className="flex flex-col items-center w-40">
                 <img src={profilePic} alt="No Image" className="hover:opacity-50 cursor-pointer rounded-full"/>
-                <motion.span className="text-3xl mt-3">{userName}</motion.span>
+                <motion.span className="text-3xl mt-2 text-center">{userName}</motion.span>
             </motion.div>
             <motion.div
             initial={{

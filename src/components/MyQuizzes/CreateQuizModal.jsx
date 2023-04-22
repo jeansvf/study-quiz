@@ -52,7 +52,7 @@ export default function CreateQuizModal({setQuizModalActive, getQuizzes}) {
         }}
         onSubmit={(e) => {
             handleSubmit(e)
-        }} className="bg-white z-10 overflow-y-scroll overflow-x-hidden pb-24 pt-6 px-6 w-full h-full top-0 fixed flex flex-col sm:rounded-xl sm:p-6 sm:w-1/3 sm:right-1/3 sm:top-20 sm:h-5/6">
+        }} className="bg-white z-20 overflow-y-scroll overflow-x-hidden pb-24 pt-6 px-6 w-full h-full top-0 fixed flex flex-col sm:rounded-xl sm:p-6 sm:w-1/3 sm:right-1/3 sm:top-20 sm:h-5/6">
             <TfiClose onClick={() => setQuizModalActive(false)} className="absolute right-6 cursor-pointer" size={30} color="black" />
             <div className="flex flex-col">
                 <h1 className="text-4xl mb-4 text-center text-black">Create Quiz</h1>

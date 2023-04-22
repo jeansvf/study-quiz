@@ -21,7 +21,7 @@ export default function FinalAnswersModal({answers, activeModal}) {
         transition={{
             duration: .1,
         }}
-        className="overflow-y-scroll z-10 w-11/12 sm:w-[26rem] h-3/4 p-3 bg-[#eeeeee] absolute top-1/2 left-1/2 rounded-md">
+        className="overflow-y-scroll z-20 w-11/12 sm:w-[26rem] h-3/4 p-3 bg-[#eeeeee] absolute top-1/2 left-1/2 rounded-md">
             <MdClose onClick={() => activeModal(false)} size={30} color='black' className="ml-auto cursor-pointer" />
             {
                 answers.map((answer) => {

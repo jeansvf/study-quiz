@@ -56,7 +56,7 @@ export default function MyQuizzes() {
                         quizModalActive == true ? (
                             <>
                                 <DarkBackground />
-                                <CreateQuizModal getQuizzes={getQuizzes}/>
+                                <CreateQuizModal setQuizModalActive={setQuizModalActive} getQuizzes={getQuizzes}/>
                             </>
                             ) : null
                     }

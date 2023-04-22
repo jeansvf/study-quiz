@@ -11,6 +11,6 @@ export default function DarkBackground() {
         exit={{
             opacity: 0
         }}
-        className="fixed z-10 top-0 left-0 w-full h-full bg-black opacity-50"></motion.div>
+        className="fixed z-20 top-0 left-0 w-full h-full bg-black opacity-50"></motion.div>
     )
 }
