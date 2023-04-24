@@ -50,7 +50,7 @@ export default function UserProfile() {
                 duration: .3,
                 delay: .2
             }}
-            className="flex flex-col sm:ml-8 mx-auto mt-4 sm:mt-0 sm:mx-0 items-center sm:items-start self-center w-96 text-lg">
+            className="flex flex-col sm:ml-8 mx-auto mt-4 sm:mt-0 sm:mx-0 items-center sm:items-start self-center w-fit-content text-lg">
                 <p className="opacity-70">Created Quizzes: 14</p>
                 <p className="opacity-70">Completed Quizzes: <span>23</span></p>
                 <p className="opacity-70">Answered Questions: <span>80</span></p>
