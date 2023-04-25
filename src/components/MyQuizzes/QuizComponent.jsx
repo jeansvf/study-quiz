@@ -84,7 +84,7 @@ export default function QuizComponent({quiz, getQuizzes}) {
             </AnimatePresence>
             <div className='relative bg-white h-56 w-full rounded-xl'>
                 <div className='h-14 px-4 py-3 text-white text-2xl bg-[#353535] rounded-tr-xl rounded-tl-xl'>
-                    <span className='block h-8 w-[25rem] overflow-hidden'>{quiz.quizName}</span>
+                    <span className='block h-8 max-w-full overflow-hidden'>{quiz.quizName}</span>
                 </div>
                 <div className='h-[6.5rem] px-4 py-2 overflow-hidden text-[1.3rem] text-black opacity-60'>
                     {quiz.description}

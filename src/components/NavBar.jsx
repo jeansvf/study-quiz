@@ -21,7 +21,7 @@ export default function NavBar() {
         <nav className="fixed top-0 flex w-full z-10 justify-between items-center h-16 bg-white drop-shadow-md">
             <span className="absolute left-1/2 -translate-x-1/2 text-xl font-medium underline underline-offset-2">{setTitle()}</span>
             <HiMenu onClick={() => setSideBarActive(true)} className="cursor-pointer ml-4" size={38} />
-            <Link to={"/account"} className="flex h-fit mr-6">
+            <Link to={"/account"} className="flex h-fit mr-5">
                 <img src={profilePic} alt="profile picture" className="bg-gray-400 rounded-full w-14 h-14" />
             </Link>
         </nav>
