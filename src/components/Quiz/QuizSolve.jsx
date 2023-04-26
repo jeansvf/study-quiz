@@ -9,7 +9,6 @@ export default function QuizSolve ({quiz}) {
     const [typedAnswer, setTypedAnswer] = useState("")
 
     const checkQuestion = (answer) => {
-
         // if question is guessed right, add to correctAnswers
         if (quiz.questions[actualQuestion].rightAnswer == answer) {
             setCorrectAnswers(prev => [...prev, quiz.questions[actualQuestion]])
@@ -49,7 +48,12 @@ export default function QuizSolve ({quiz}) {
                         <h1 className="text-4xl my-3 mx-4 text-[#353535]">{quiz.quizName}</h1>
                         <p className="text-xl mx-4 text-black">{actualQuestion + 1 + " - "}{quiz.questions[actualQuestion].text}</p>
                         <div className="flex w-full mt-auto">
-                            <textarea onKeyDown={(e) => e.key == "Enter" ? checkQuestion(typedAnswer.toLowerCase()) : null} onChange={(e) => setTypedAnswer(e.target.value)} autoFocus className="w-full m-3 pl-1 resize-none h-16 text-xl rounded-md bg-[#f1f1f1]" placeholder="Type your answer" />
+                            <textarea onKeyDown={(e) => {
+                                if (e.key == "Enter"){
+                                    e.preventDefault()
+                                    checkQuestion(typedAnswer.toLowerCase())
+                                }}
+                            } onChange={(e) => setTypedAnswer(e.target.value)} autoFocus className="w-full m-3 pl-1 resize-none h-16 text-xl rounded-md bg-[#f1f1f1]" placeholder="Type your answer" />
                             <button onClick={() => checkQuestion(typedAnswer.toLowerCase())} className="mr-3 mb-3 mt-3 px-3 rounded-md bg-[#353535] text-white" type="button">Done</button>
                         </div>
                     </div>

@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { auth } from "../../features/firebase-config"
+import { auth, db } from "../../features/firebase-config"
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
+import { collection, doc, setDoc } from "firebase/firestore";
 
 export default function LoginForm() {
     const [email, setEmail] = useState();
@@ -13,9 +14,22 @@ export default function LoginForm() {
     const createNewUser = () => {
         createUserWithEmailAndPassword(auth, email, password).then((credentials) => {
             updateProfile(credentials.user, {
+                // TODO: change displayname place maybe?
                 displayName: name,
             })
-        }).then(() => navigate("/my-quizzes"))
+            return credentials
+        })
+        .then((credentials) => {
+            let newDocRef = doc(collection(db, "users"))
+            setDoc(newDocRef, {
+                answeredQuestions: 0,
+                correctAnswers: 0,
+                documentId: newDocRef.id,
+                userId: credentials.user.uid,
+                wrongAnswers: 0,
+            })
+        })
+        .then(() => navigate("/my-quizzes"))
     }
 
     return (    

@@ -26,8 +26,8 @@ export default function MyQuizzes() {
         })
         return () => {
             effectRan.current = true;
-        }
-    }}, [])
+        }}
+    }, [])
 
     // add quizzes from the user to the quizzes state
     const getQuizzes = async (uid) => {
