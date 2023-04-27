@@ -25,7 +25,8 @@ export default function FinishedQuiz({guesses, correctAnswers, wrongAnswers}) {
                         updateDoc(userDocRef, {
                             answeredQuestions: increment(correctAnswers.length + wrongAnswers.length),
                             correctAnswers: increment(correctAnswers.length),
-                            wrongAnswers: increment(wrongAnswers.length)
+                            wrongAnswers: increment(wrongAnswers.length),
+                            completedQuizzes: increment(1)
                         })
                     }))
                 }

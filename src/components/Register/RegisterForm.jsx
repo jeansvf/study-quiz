@@ -24,6 +24,7 @@ export default function LoginForm() {
             setDoc(newDocRef, {
                 answeredQuestions: 0,
                 correctAnswers: 0,
+                completedQuizzes: 0,
                 documentId: newDocRef.id,
                 userId: credentials.user.uid,
                 wrongAnswers: 0,

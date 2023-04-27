@@ -4,23 +4,34 @@ import { auth, db } from "../../features/firebase-config"
 import { motion } from "framer-motion";
 import profilePic from "../../assets/profile_pic.png"
 import { collection, getDocs, query, where } from "firebase/firestore";
+import { useRef } from "react";
 
 export default function UserProfile() {
-    const [userEmail, setUserEmail] = useState()
+    const effectRan = useRef(false)
+
     const [userName, setUserName] = useState()
     const [createdQuizzes, setCreatedQuizzes] = useState([])
     const [completedQuizzes, setCompletedQuizzes] = useState()
     const [answeredQuestions, setAnsweredQuestions] = useState()
-    const [correctRate, setCorrectRate] = useState()
 
     useEffect(() => {
-        onAuthStateChanged(auth, async (user) => {
-            if(user){
-                setUserEmail(user.email)
-                setUserName(user.displayName)
-                getCreatedQuizzes(user.uid)
-            }
-        })
+        if(effectRan.current === false) {
+            onAuthStateChanged(auth, async (user) => {
+                if(user){
+                    setUserName(user.displayName)
+                    getCreatedQuizzes(user.uid)
+
+                    const q = query(collection(db, "users"), where("userId", "==", user.uid))
+                        getDocs(q).then(data => data.forEach((e) => {
+                            setAnsweredQuestions(e.data().answeredQuestions)
+                            setCompletedQuizzes(e.data().completedQuizzes)
+                    }))
+                }
+            })
+        }
+        return () => {
+            effectRan.current = true
+        }
     }, [])
 
     const getCreatedQuizzes = async (uid) => {
@@ -66,9 +77,9 @@ export default function UserProfile() {
             }}
             className="flex flex-col sm:ml-8 mx-auto mt-4 sm:mt-0 sm:mx-0 items-center sm:items-start self-center w-fit-content text-lg">
                 <p className="opacity-70">Created Quizzes: {createdQuizzes.length}</p>
-                <p className="opacity-70">Completed Quizzes: <span>23</span></p>
-                <p className="opacity-70">Answered Questions: <span>80</span></p>
-                <p className="opacity-70">Correct Answers Rate: <span>4.3/5</span></p>
+                <p className="opacity-70">Completed Quizzes: {completedQuizzes}</p>
+                <p className="opacity-70">Answered Questions: {answeredQuestions}</p>
+                <p className="opacity-70">Answers Score: {}</p>
             </motion.div>
         </div>
     )
