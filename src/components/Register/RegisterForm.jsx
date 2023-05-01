@@ -14,7 +14,7 @@ export default function LoginForm() {
     const createNewUser = () => {
         createUserWithEmailAndPassword(auth, email, password).then((credentials) => {
             updateProfile(credentials.user, {
-                // TODO: change displayname place maybe?
+                // TODO: change displayname place
                 displayName: name,
             })
             return credentials

@@ -16,22 +16,19 @@ export default function CreateQuizModal({setQuizModalActive, getQuizzes}) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-            // checks if the user is authenticated
-            onAuthStateChanged(auth, (user) => {
-                if(user) {
-                    let newDocRef = doc(collection(db, "quizzes"))
-                    // creates a new document
-                    setDoc(newDocRef, {
-                        quizId: newDocRef.id,
-                        quizName: quizName,
-                        description: quizDescription,
-                        quizOwner: user.uid,
-                        questions: quizQuestions,
-                    })
-                // re-fetch the data into the quizzes variable
-                getQuizzes(user.uid)
-            }})
-            setQuizModalActive(false)
+        // checks if the user is authenticated
+        let newDocRef = doc(collection(db, "quizzes"))
+        // creates a new document
+        setDoc(newDocRef, {
+            quizId: newDocRef.id,
+            quizName: quizName,
+            description: quizDescription,
+            quizOwner: auth.currentUser.uid,
+            questions: quizQuestions,
+        })
+        // re-fetch the data into the quizzes variable
+        getQuizzes(auth.currentUser.uid)
+        setQuizModalActive(false)
     }
 
     return (

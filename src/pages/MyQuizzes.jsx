@@ -6,7 +6,7 @@ import DarkBackground from "../components/DarkBackground";
 import { BsPlus } from 'react-icons/bs';
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "../features/firebase-config";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, getDocsFromServer, query, where } from "firebase/firestore";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence } from 'framer-motion';
 import { useSideBarContext } from "../SideBarContext";
@@ -18,11 +18,15 @@ export default function MyQuizzes() {
 
     const { sideBarActive } = useSideBarContext();
 
+    quizzes !== undefined ? console.log(quizzes) : null
     useEffect(() => {
         if(effectRan.current === false) {
-        // if user is logged in, add quizzes to the quizzes state
-        onAuthStateChanged(auth, (user) => {
-            if(user) getQuizzes(user.uid)
+            // if user is logged in, add quizzes to the quizzes state
+            onAuthStateChanged(auth, (user) => {
+            if(user) {
+                console.log(user.uid);
+                getQuizzes(user.uid)
+            }
         })
         return () => {
             effectRan.current = true;
@@ -33,7 +37,7 @@ export default function MyQuizzes() {
     const getQuizzes = async (uid) => {
         setQuizzes([])
         const q = query(collection(db, "quizzes"), where("quizOwner", "==", uid))
-        const querySnapshot = await getDocs(q)
+        const querySnapshot = await getDocsFromServer(q)
         return querySnapshot.forEach(doc => {
             setQuizzes((prev) => [...prev, doc.data()])
         });

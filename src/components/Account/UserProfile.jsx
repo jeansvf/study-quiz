@@ -1,9 +1,8 @@
-import { onAuthStateChanged, signOut } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { auth, db } from "../../features/firebase-config"
 import { motion } from "framer-motion";
 import profilePic from "../../assets/profile_pic.png"
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, getDocsFromServer, query, where } from "firebase/firestore";
 import { useRef } from "react";
 
 export default function UserProfile() {
@@ -13,30 +12,30 @@ export default function UserProfile() {
     const [createdQuizzes, setCreatedQuizzes] = useState([])
     const [completedQuizzes, setCompletedQuizzes] = useState()
     const [answeredQuestions, setAnsweredQuestions] = useState()
+    const [wrongAnswers, setWrongAnswers] = useState(0)
+    const [correctAnswers, setCorrectAnswers] = useState(0)
+    const [rating, setRating] = useState(0)
 
     useEffect(() => {
         if(effectRan.current === false) {
-            onAuthStateChanged(auth, async (user) => {
-                if(user){
-                    setUserName(user.displayName)
-                    getCreatedQuizzes(user.uid)
+            setUserName(auth.currentUser.displayName)
+            getCreatedQuizzes(auth.currentUser.uid)
 
-                    const q = query(collection(db, "users"), where("userId", "==", user.uid))
-                        getDocs(q).then(data => data.forEach((e) => {
-                            setAnsweredQuestions(e.data().answeredQuestions)
-                            setCompletedQuizzes(e.data().completedQuizzes)
-                    }))
-                }
-            })
-        }
-        return () => {
-            effectRan.current = true
+            const q = query(collection(db, "users"), where("userId", "==", auth.currentUser.uid))
+                getDocsFromServer(q).then(data => data.forEach((e) => {
+                    setCompletedQuizzes(e.data().completedQuizzes)
+                    setAnsweredQuestions(e.data().answeredQuestions)
+                    setCorrectAnswers(e.data().correctAnswers)
+                    setWrongAnswers(e.data().wrongAnswers)
+            }))
         }
     }, [])
 
+    useEffect(() => {setRating((correctAnswers / answeredQuestions * 5).toString().substring(0, 3))}, [correctAnswers])
+
     const getCreatedQuizzes = async (uid) => {
         const q = query(collection(db, "quizzes"), where("quizOwner", "==", uid))
-        const querySnapshot = await getDocs(q)
+        const querySnapshot = await getDocsFromServer(q)
         querySnapshot.forEach(doc => {
             setCreatedQuizzes((prev) => [...prev, doc.data()])
         })
@@ -79,7 +78,7 @@ export default function UserProfile() {
                 <p className="opacity-70">Created Quizzes: {createdQuizzes.length}</p>
                 <p className="opacity-70">Completed Quizzes: {completedQuizzes}</p>
                 <p className="opacity-70">Answered Questions: {answeredQuestions}</p>
-                <p className="opacity-70">Answers Score: {}</p>
+                <p className="opacity-70">Answers Score: {rating}</p>
             </motion.div>
         </div>
     )

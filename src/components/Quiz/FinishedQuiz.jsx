@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import FinalAnswersModal from "./FinalAnswersModal";
 import DarkBackground from "../DarkBackground";
-import { collection, doc, getDocs, increment, query, updateDoc, where } from "firebase/firestore";
+import { collection, doc, getDocs, getDocsFromServer, increment, query, updateDoc, where } from "firebase/firestore";
 import { auth, db } from "../../features/firebase-config";
 import { onAuthStateChanged } from "firebase/auth";
 
@@ -18,7 +18,7 @@ export default function FinishedQuiz({guesses, correctAnswers, wrongAnswers}) {
                 if (user) {
                     // query the "users" collection to find the user document id
                     const q = query(collection(db, "users"), where("userId", "==", user.uid))
-                    getDocs(q).then(data => data.forEach(element => {
+                    getDocsFromServer(q).then(data => data.forEach(element => {
                         // search the document with the user with its id
                         const userDocRef = doc(db, "users", element.data().documentId)
                         // update user document and increment answeredQuestions

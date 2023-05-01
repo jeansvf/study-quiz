@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { deleteDoc, doc } from 'firebase/firestore'
 import { auth, db } from '../../features/firebase-config'
-import { onAuthStateChanged } from 'firebase/auth'
 
 export default function QuizComponent({quiz, getQuizzes}) {
     const [quizStartWarning, setQuizStartWarning] = useState(false)
@@ -70,12 +69,8 @@ export default function QuizComponent({quiz, getQuizzes}) {
                                 <button onClick={() => setRemoveQuizWarning(false)} type='button' className='w-5/12 h-12 bg-gray-400 text-white rounded-md text-lg'>Cancel</button>
                                 <button onClick={() => {
                                     setRemoveQuizWarning(false)
-                                    onAuthStateChanged(auth, (user) => {
-                                        if(user) {
-                                            deleteDoc(doc(db, "quizzes", quiz.quizId))
-                                        }
-                                        getQuizzes(user.uid)
-                                    })
+                                    deleteDoc(doc(db, "quizzes", quiz.quizId))
+                                    getQuizzes(auth.currentUser.uid)
                                 }} type='button' className='w-5/12 h-12 bg-red-400 hover:bg-red-500 text-white rounded-md text-lg'>Delete</button>
                             </div>
                         </motion.div>
