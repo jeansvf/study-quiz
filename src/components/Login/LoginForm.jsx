@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../features/firebase-config";
 import { Link, useNavigate } from "react-router-dom";
@@ -9,6 +9,7 @@ export default function LoginForm() {
 
     const navigate = useNavigate()
 
+    useEffect( () => {}, [])
     return (
         <form onSubmit={(e) => {
             e.preventDefault()
